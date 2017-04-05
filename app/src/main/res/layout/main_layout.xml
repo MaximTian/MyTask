@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <!-- 活动界面-->
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+            </FrameLayout>
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TabWidget>
+
+            <!-- 底部按钮-->
+            <RadioGroup
+                android:id="@+id/main_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_bar_bg"
+                android:paddingTop="8dp"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/tab_task"
+                    android:checked="true"
+                    android:textColor="@drawable/tab_text_style"
+                    android:drawableTop="@drawable/movie_style"
+                    android:text="任务"
+                    style="@style/tab_button_bg" />
+
+                <RadioButton
+                    android:id="@+id/tab_project"
+                    android:textColor="@drawable/tab_text_style"
+                    android:drawableTop="@drawable/movie_style"
+                    android:text="项目"
+                    style="@style/tab_button_bg" />
+
+
+                <RadioButton
+                    android:id="@+id/tab_dynamic"
+                    android:textColor="@drawable/tab_text_style"
+                    android:drawableTop="@drawable/movie_style"
+                    android:text="动态"
+                    style="@style/tab_button_bg" />
+
+                <RadioButton
+                    android:id="@+id/tab_personal"
+                    android:textColor="@drawable/tab_text_style"
+                    android:drawableTop="@drawable/movie_style"
+                    android:text="个人"
+                    style="@style/tab_button_bg" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
+
