@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/login_bg"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_margin="15dp"
+        android:padding="15dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@drawable/login_bg_style" >
+
+        <!-- 账号 -->
+        <TextView
+            android:id="@+id/ac_info_r"
+            android:layout_width="wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentTop="true"
+            android:textSize="20sp"
+            android:text = "账号" />
+
+        <EditText
+            android:id="@+id/register_account"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="5dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/ac_info_r"
+            android:textCursorDrawable="@drawable/cursor_style"
+            android:hint="Input your account"
+            android:background="@drawable/edit_selector" />
+
+        <!-- 密码 -->
+        <TextView
+            android:id="@+id/ps_info_r"
+            android:layout_width="wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/register_account"
+            android:textSize="20sp"
+            android:text = "设置密码" />
+
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="5dp"
+            android:inputType="textPassword"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/ps_info_r"
+            android:textCursorDrawable="@drawable/cursor_style"
+            android:background="@drawable/edit_selector" />
+
+        <!-- 再次确认密码 -->
+        <TextView
+            android:id="@+id/ps_conf"
+            android:layout_width="wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/register_password"
+            android:textSize="20sp"
+            android:text = "确认密码" />
+
+        <EditText
+            android:id="@+id/register_confirm"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="5dp"
+            android:inputType="textPassword"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/ps_conf"
+            android:textCursorDrawable="@drawable/cursor_style"
+            android:background="@drawable/edit_selector" />
+
+        <!-- 登录按钮 -->
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/register_confirm"
+            android:background="@drawable/blue_button_selector"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="确定" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:src="@drawable/team_logo"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+</LinearLayout>

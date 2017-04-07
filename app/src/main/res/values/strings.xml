@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">团队任务管理</string>
+    <string name="register_link">没有帐号？ <a href="#">注册</a></string>
 </resources>
