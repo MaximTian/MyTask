@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" >
+
+        <!-- checkbox -->
+        <ImageView
+            android:id="@+id/check_box_c"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:scaleType="fitStart"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/checkbox_checked" />
+
+        <!-- 任务名称 -->
+        <TextView
+            android:id="@+id/task_name_c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/check_box_c"
+            android:layout_marginLeft="4dp"
+            android:textColor="#3b3b3b"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
+</LinearLayout>

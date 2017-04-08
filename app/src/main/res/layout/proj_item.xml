@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center"
-            android:text="项目名称"
             android:textSize="20sp"
             android:textColor="#5c5c5c" />
     </LinearLayout>

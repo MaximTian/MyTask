@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.example.maximtian.myapptask.R;
 
@@ -37,7 +36,7 @@ public class Proj_Activity extends Activity {
         AddProj = (Button) findViewById(R.id.addProj);
 
         simpleAda = new SimpleAdapter(this, getData(),
-                R.layout.proj_listview_item, new String[]{"image", "name"},
+                R.layout.proj_item, new String[]{"image", "name"},
                 new int[]{R.id.proj_image, R.id.proj_name});  // 设计项目适配器
 
         proj_lv.setAdapter(simpleAda); // 显示项目名单
