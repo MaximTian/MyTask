@@ -29,6 +29,28 @@
             android:textColor="#3b3b3b"
             android:textSize="15sp" />
 
+        <!-- 负责人 -->
+        <ImageView
+            android:id="@+id/portrait_c"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/check_box_c"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/animal1"
+            android:scaleType="fitStart"
+            android:layout_toRightOf="@+id/check_box_c" />
+
+        <TextView
+            android:id="@+id/responsor_c"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/check_box_c"
+            android:layout_toRightOf="@id/portrait_c"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#787878"
+            android:textSize="11sp" />
+
     </RelativeLayout>
 
     <TextView

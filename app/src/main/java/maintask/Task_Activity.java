@@ -68,10 +68,10 @@ public class Task_Activity extends Activity {
         gData.add(new Group("已完成"));
 
         lsData = new ArrayList<Item>();
-        lsData.add(new Item(R.drawable.checkbox_checked, "剑圣"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "德莱文"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "男枪"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "韦鲁斯"));
+        lsData.add(new Item(R.drawable.checkbox_checked, "剑圣", R.drawable.animal1, "Maxim"));
+        lsData.add(new Item(R.drawable.checkbox_checked, "德莱文", R.drawable.animal1, "Maxim"));
+        lsData.add(new Item(R.drawable.checkbox_checked, "男枪", R.drawable.animal1, "Maxim"));
+        lsData.add(new Item(R.drawable.checkbox_checked, "韦鲁斯", R.drawable.animal1, "Maxim"));
         iData.add(lsData);
 
         myexp_ada = new MyExpandAdapter(gData,iData,mContext);
