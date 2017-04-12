@@ -21,6 +21,9 @@
         <activity android:name="maintask.Proj_Activity" />
         <activity android:name="maintask.Proj_Add" />
         <activity android:name="maintask.Register_Activity" />
+        <activity android:name="maintask.Dynamic_Activity" />
+        <activity android:name="maintask.Task_Detail" />
+        <activity android:name="maintask.Proj_Detail" />
     </application>
 
 </manifest>

@@ -97,19 +97,20 @@ public class MyExpandAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(mContext).inflate(
                     R.layout.expandlist_item, parent, false);
             itemHolder = new ViewHolderItem();
-            itemHolder.img_icon = (ImageView) convertView.findViewById(R.id.check_box_c);
             itemHolder.tv_name = (TextView) convertView.findViewById(R.id.task_name_c);
             itemHolder.prot_bg = (ImageView) convertView.findViewById(R.id.portrait_c);
             itemHolder.prot_name = (TextView) convertView.findViewById(R.id.responsor_c);
+            itemHolder.time = (TextView) convertView.findViewById(R.id.task_time_c);
+            itemHolder.proj = (TextView) convertView.findViewById(R.id.proj_belong_c);
             convertView.setTag(itemHolder);
         }else{
             itemHolder = (ViewHolderItem) convertView.getTag();
         }
-        itemHolder.img_icon.setImageResource(iData.get(groupPosition).get(childPosition).getiId());
         itemHolder.tv_name.setText(iData.get(groupPosition).get(childPosition).getiName());
-
         itemHolder.prot_bg.setImageResource(iData.get(groupPosition).get(childPosition).getiPort());
         itemHolder.prot_name.setText(iData.get(groupPosition).get(childPosition).getiPort_name());
+        itemHolder.time.setText(iData.get(groupPosition).get(childPosition).getiTime());
+        itemHolder.proj.setText(iData.get(groupPosition).get(childPosition).getiProj());
         return convertView;
     }
 
@@ -125,10 +126,11 @@ public class MyExpandAdapter extends BaseExpandableListAdapter {
     }
 
     private static class ViewHolderItem{
-        private ImageView img_icon; // 完成状态
         private TextView tv_name; // 任务名称
         private ImageView prot_bg; // 头像
         private TextView prot_name; // 头像姓名
+        private TextView time; // 时间
+        private TextView proj; // 归属s
     }
 
 }

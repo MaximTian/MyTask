@@ -6,23 +6,21 @@ package datamodel;
 
 public class Item {
 
-    private int iId;
-    private String iName;
-    private int iPort;
-    private String iPort_name;
+    private String iName; // 任务名称
+    private int iPort; // 头像
+    private String iPort_name; // 头像名称
+    private String iTime; // 任务完成时间
+    private String iProj; // 任务归属
 
     public Item() {
     }
 
-    public Item(int iId, String iName, int iPort, String iPort_name) {
-        this.iId = iId;
+    public Item(String iName, int iPort, String iPort_name, String iTime, String iProj) {
         this.iName = iName;
         this.iPort = iPort;
         this.iPort_name = iPort_name;
-    }
-
-    public int getiId() {
-        return iId;
+        this.iTime = iTime;
+        this.iProj = iProj;
     }
 
     public String getiName() {
@@ -37,8 +35,12 @@ public class Item {
         return iPort_name;
     }
 
-    public void setiId(int iId) {
-        this.iId = iId;
+    public String getiTime() {
+        return iTime;
+    }
+
+    public String getiProj() {
+        return iProj;
     }
 
     public void setiName(String iName) {
@@ -51,5 +53,13 @@ public class Item {
 
     public void setiPort_name(String iPort_name) {
         this.iPort_name = iPort_name;
+    }
+
+    public void setiTime(String iTime) {
+        this.iTime = iTime;
+    }
+
+    public void setiProj(String iProj) {
+        this.iProj = iProj;
     }
 }

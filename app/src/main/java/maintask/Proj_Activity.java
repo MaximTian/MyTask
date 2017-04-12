@@ -44,7 +44,8 @@ public class Proj_Activity extends Activity {
         proj_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Intent change_act = new Intent(Proj_Activity.this, Proj_Detail.class);
+                startActivity(change_act);
             }
         });
 

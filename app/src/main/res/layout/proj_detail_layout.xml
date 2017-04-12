@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="275dp">
+
+            <!-- 自定义check_box -->
+            <ImageView
+                android:id="@+id/bg"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/proj_background1" />
+
+            <TextView
+                android:id="@+id/proj_detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="22dp"
+                android:text="洗澡"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/proj_detail_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1成员"
+                android:textColor="@color/text_grey"
+                android:textSize="13sp"
+                android:layout_below="@+id/proj_detail_title"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:id="@+id/linearlay_1"
+                android:layout_below="@+id/proj_detail_number"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#D3D3D3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/project_detail_button_style"
+                android:text="添加任务" />
+
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:background="#D3D3D3" />
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/project_detail_button_style"
+                android:text="添加成员" />
+
+            <TextView
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_height="match_parent"
+                android:layout_width="1dp"
+                android:background="#D3D3D3" />
+
+            <Button
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/project_detail_button_style"
+                android:text="项目动态" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/text_grey"
+        android:text="任务清单" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
+    <ListView
+        android:id="@+id/proj_task_listviv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

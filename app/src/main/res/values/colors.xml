@@ -10,4 +10,5 @@
 
     <color name="text_blue">#0d98e3</color>
     <color name="text_blue_focus">#036da6</color>
+    <color name="text_grey">#8b8b8b</color>
 </resources>

@@ -2,8 +2,10 @@ package maintask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -43,6 +45,14 @@ public class Task_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_layout);
 
+        init_listview();
+
+        expand_lv = (ExpandableListView) findViewById(R.id.expand_listview);
+        expand_lv.setGroupIndicator(null);
+        getExpand();
+    }
+
+    private void init_listview() {
         task_lv = (ListView) findViewById(R.id.task_listview); // 加载项目列表
         simpleAda = new SimpleAdapter(this, getData(),
                 R.layout.task_item, new String[]{"name", "portrait", "responsor", "time", "proj_be"},
@@ -52,13 +62,10 @@ public class Task_Activity extends Activity {
         task_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Intent start_main = new Intent(Task_Activity.this, Task_Detail.class);
+                startActivity(start_main);
             }
         });
-
-        expand_lv = (ExpandableListView) findViewById(R.id.expand_listview);
-        expand_lv.setGroupIndicator(null);
-        getExpand();
     }
 
     private void getExpand() {
@@ -68,14 +75,14 @@ public class Task_Activity extends Activity {
         gData.add(new Group("已完成"));
 
         lsData = new ArrayList<Item>();
-        lsData.add(new Item(R.drawable.checkbox_checked, "剑圣", R.drawable.animal1, "Maxim"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "德莱文", R.drawable.animal1, "Maxim"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "男枪", R.drawable.animal1, "Maxim"));
-        lsData.add(new Item(R.drawable.checkbox_checked, "韦鲁斯", R.drawable.animal1, "Maxim"));
+        lsData.add(new Item("剑圣", R.drawable.animal1, "Maxim", "2017-04-04 21:00", "Table"));
+        lsData.add(new Item("德莱文", R.drawable.animal1, "Maxim", "2017-04-05 02:00", "Desk"));
+        lsData.add(new Item("男枪", R.drawable.animal1, "Maxim", "2017-04-06 21:00", "Table"));
         iData.add(lsData);
 
         myexp_ada = new MyExpandAdapter(gData,iData,mContext);
         expand_lv.setAdapter(myexp_ada);
+
         expand_lv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
