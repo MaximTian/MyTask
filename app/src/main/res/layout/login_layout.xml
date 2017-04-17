@@ -65,19 +65,6 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:text="登录" />
-
-        <!-- 登录按钮 -->
-        <Button
-            android:id="@+id/query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/login"
-            android:background="@drawable/blue_button_selector"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:text="查询" />
-
     </RelativeLayout>
 
     <RelativeLayout
