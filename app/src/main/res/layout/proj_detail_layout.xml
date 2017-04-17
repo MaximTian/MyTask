@@ -67,6 +67,7 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/selectTask"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -81,11 +82,12 @@
                 android:background="#D3D3D3" />
 
             <Button
+                android:id="@+id/selectNumber"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/project_detail_button_style"
-                android:text="添加成员" />
+                android:text="选择成员" />
 
             <TextView
                 android:layout_marginTop="7dp"
@@ -95,6 +97,7 @@
                 android:background="#D3D3D3" />
 
             <Button
+                android:id="@+id/selectDynnamic"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -123,7 +126,7 @@
         android:background="#D3D3D3" />
 
     <ListView
-        android:id="@+id/proj_task_listviv"
+        android:id="@+id/proj_task_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

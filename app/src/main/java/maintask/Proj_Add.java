@@ -1,10 +1,10 @@
 package maintask;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,21 +13,33 @@ import com.example.maximtian.myapptask.R;
 
 import java.text.SimpleDateFormat;
 
+import DataBase.DBManager;
+import DataBase.Project_Item;
+import Public.Public_Value;
+
 /**
  * Created by MaximTian on 2017/4/5.
  */
 
 public class Proj_Add extends Activity {
 
-
     private ImageButton back_act;
     private Button confirm_act;
     private TextView s_time;
+    private EditText s_title;
+    private TextView s_creator;
+
+    private DBManager dbManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proj_add_layout);
+        Create_Time();
+        s_title = (EditText) findViewById(R.id.set_title);
+        s_creator = (TextView) findViewById(R.id.set_creator);
+
+        dbManager = new DBManager(this);
 
         back_act = (ImageButton) findViewById(R.id.back_arrow);
         back_act.setOnClickListener(new Button.OnClickListener() { // 创建监听
@@ -39,11 +51,18 @@ public class Proj_Add extends Activity {
         confirm_act = (Button) findViewById(R.id.confirm);
         confirm_act.setOnClickListener(new Button.OnClickListener() { // 创建监听
             public void onClick(View v) {
+                String title = s_title.getText().toString();
+                String time = s_time.getText().toString();
+                String creator = s_creator.getText().toString();
+                Project_Item proj = new Project_Item(Public_Value.getProject_ID(), title, creator, time, creator);
+                if (title.isEmpty()) {
+                    Toast.makeText(Proj_Add.this, "项目名为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    dbManager.addProjectSQL(proj);
+                }
                 finish();
             }
         });
-
-        Create_Time();
     }
 
     private void Create_Time() {
