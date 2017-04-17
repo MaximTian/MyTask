@@ -32,6 +32,23 @@ public class DBHelper extends SQLiteOpenHelper{
                 + "projectUsers varchar(200))";
         db.execSQL(sql2);
 
+        // 创建任务数据库
+        String sql3 = "Create Table If Not Exists tasks(taskId integer primary key,"
+                + "taskName varchar(100),"
+                + "taskResponser varchar(100),"
+                + "taskTime varchar(100),"
+                + "taskBelong varchar(200),"
+                + "taskState integer)";
+        db.execSQL(sql3);
+
+        // 创建动态信息数据库
+        String sql4 = "Create Table If Not Exists dynamics(dynamicId integer primary key,"
+                + "dynamicCreator varchar(100),"
+                + "dynamicOption varchar(100),"
+                + "dynamicAim varchar(100),"
+                + "dynamicBelong varchar(100),"
+                + "dynamicTime varchar(100))";
+        db.execSQL(sql4);
     }
 
     @Override
@@ -41,6 +58,12 @@ public class DBHelper extends SQLiteOpenHelper{
 
         String sql2 = "DROP TABLE IF EXISTS projects";
         db.execSQL(sql2);
+
+        String sql3 = "DROP TABLE IF EXISTS tasks";
+        db.execSQL(sql3);
+
+        String sql4 = "DROP TABLE IF EXISTS dynamics";
+        db.execSQL(sql4);
         onCreate(db);
     }
 }

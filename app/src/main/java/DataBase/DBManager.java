@@ -9,6 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import maintask.Dynamic_Activity;
+import maintask.Task_Add_Activity;
+
 /**
  * Created by MaximTian on 2016/7/14.
  */
@@ -32,7 +35,6 @@ public class DBManager {
             values.put("userState", user.getState());
             values.put("userImage", user.getImage());
             db.insert("users", null, values);
-            Log.v("tmx", "succeed");
             db.close();
         } catch (Exception e) {
         }
@@ -119,7 +121,6 @@ public class DBManager {
             values.put("projectTime", proj.getTime());
             values.put("projectUsers", proj.getUser_gather());
             db.insert("projects", null, values);
-            Log.v("tmx", "succeed_proj");
             db.close();
         } catch (Exception e) {
         }
@@ -182,13 +183,158 @@ public class DBManager {
                 proj.setCreator(cursor.getString(2));
                 proj.setTime(cursor.getString(3));
                 proj.setUser_gather(cursor.getString(4));
-                Log.v("tmx", "succeed1111");
             }
             cursor.close();
             db.close();
         } catch (Exception e) {
         }
         return proj;
+    }
+
+    /* String sql3 = "Create Table If Not Exists tasks(taskId integer primary key,"
+                + "taskName varchar(100),"
+                + "taskResponser varchar(100),"
+                + "taskTime varchar(100),"
+                + "taskBelong varchar(200),"
+                + "taskState integer)"; */
+    public void addTaskSQL(Task_Item task) {
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("taskId", task.getId());
+            values.put("taskName", task.getName());
+            values.put("taskResponser", task.getResponser());
+            values.put("taskTime", task.getTime());
+            values.put("taskBelong", task.getProject_Belong());
+            values.put("taskState", task.getState());
+            db.insert("tasks", null, values);
+            db.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Task_Item> getAllTask() {
+        List<Task_Item> list = new ArrayList<Task_Item>();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.query("tasks", null, null, null, null, null, null);
+            Task_Item task = null;
+            while (cursor.moveToNext()) {
+                task = new Task_Item();
+                task.setId(cursor.getInt(cursor.getColumnIndex("taskId")));
+                task.setName(cursor.getString(cursor.getColumnIndex("taskName")));
+                task.setResponser(cursor.getString(cursor.getColumnIndex("taskResponser")));
+                task.setTime(cursor.getString(cursor.getColumnIndex("taskTime")));
+                task.setProject_Belong(cursor.getString(cursor.getColumnIndex("taskBelong")));
+                task.setState(cursor.getInt(cursor.getColumnIndex("taskState")));
+                list.add(task);
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public void updateTaskData(int id, String name, String responser, String time, String project, int state) {
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("taskName", name);
+            values.put("taskResponser", responser);
+            values.put("taskTime", time);
+            values.put("taskBelong", project);
+            values.put("taskState", state);
+            Log.v("tmx", "succeed_task");
+            db.update("tasks", values, "taskId=" + id, null);
+        } catch (Exception e) {
+        } finally {
+            db.close();
+        }
+    }
+
+    /* String sql3 = "Create Table If Not Exists tasks(taskId integer primary key,"
+                + "taskName varchar(100),"
+                + "taskResponser varchar(100),"
+                + "taskTime varchar(100),"
+                + "taskBelong varchar(200),"
+                + "taskState integer)"; */
+    public Task_Item QueryTask(String title) {
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        Task_Item task = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.rawQuery(
+                    "select taskId,taskName,taskResponser,taskTime,taskBelong,taskState" +
+                            " from tasks where taskName=?",
+                    new String[] { title });
+            if (cursor.moveToNext()) {
+                task = new Task_Item();
+                task.setId(cursor.getInt(0));
+                task.setName(cursor.getString(1));
+                task.setResponser(cursor.getString(2));
+                task.setTime(cursor.getString(3));
+                task.setProject_Belong(cursor.getString(4));
+                task.setState(cursor.getInt(5));
+            }
+            Log.v("tmx", "succeed_querytask");
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+        }
+        return task;
+    }
+
+    /* String sql4 = "Create Table If Not Exists dynamics(dynamicId integer primary key,"
+                + "dynamicCreator varchar(100),"
+                + "dynamicOption varchar(100),"
+                + "dynamicAim varchar(100),"
+                + "dynamicTime varchar(100))"; */
+    public void addDynamicSQL(Dynamic_Item dyna) {
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("dynamicId", dyna.getId());
+            values.put("dynamicCreator", dyna.getCreator());
+            values.put("dynamicOption", dyna.getOpt());
+            values.put("dynamicAim", dyna.getAim());
+            values.put("dynamicTime", dyna.getTime());
+            values.put("dynamicBelong", dyna.getBelong());
+            db.insert("dynamics", null, values);
+            db.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public List<Dynamic_Item> getAllDynamic() {
+        List<Dynamic_Item> list = new ArrayList<Dynamic_Item>();
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.query("dynamics", null, null, null, null, null, null);
+            Dynamic_Item dynamic = null;
+            while (cursor.moveToNext()) {
+                dynamic = new Dynamic_Item();
+                dynamic.setId(cursor.getInt(cursor.getColumnIndex("dynamicId")));
+                dynamic.setCreator(cursor.getString(cursor.getColumnIndex("dynamicCreator")));
+                dynamic.setOpt(cursor.getString(cursor.getColumnIndex("dynamicOption")));
+                dynamic.setTime(cursor.getString(cursor.getColumnIndex("dynamicTime")));
+                dynamic.setAim(cursor.getString(cursor.getColumnIndex("dynamicAim")));
+                dynamic.setBelong(cursor.getString(cursor.getColumnIndex("dynamicBelong")));
+                list.add(dynamic);
+            }
+            cursor.close();
+            db.close();
+        } catch (Exception e) {
+        }
+        return list;
     }
 
 }

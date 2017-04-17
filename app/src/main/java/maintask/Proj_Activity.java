@@ -54,7 +54,6 @@ public class Proj_Activity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Map<String, String> map = (HashMap<String, String>) simpleAda.getItem(pos);
-            //    Toast.makeText(Proj_Activity.this, map.get("name"), Toast.LENGTH_SHORT).show();
                 Public_Value.setCurrent_proj_name(map.get("name"));
                 Intent change_act = new Intent(Proj_Activity.this, Proj_Detail.class);
                 change_act.putExtra("name", map.get("name"));

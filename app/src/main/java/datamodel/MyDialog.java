@@ -27,12 +27,12 @@ public class MyDialog extends Dialog {
     public MyDialog(Context context) {
         super(context, R.style.mydialog_style);
         this.mContext = context;
-        initMyDialog();
+//        initMyDialog();
     }
-
+/*
     private void initMyDialog() {
         View view = LayoutInflater.from(mContext).inflate(R.layout.task_add_layout, null);
-        etTitle = (EditText) view.findViewById(R.id.dialog_task_title);
+        etTitle = (EditText) view.findViewById(R.id.task_add_title);
         time_picker = (LinearLayout) view.findViewById(R.id.time_picker);
         confirmBt = (Button) view.findViewById(R.id.bt_confirm);
         cancelBt = (Button) view.findViewById(R.id.bt_cancel);
@@ -56,5 +56,5 @@ public class MyDialog extends Dialog {
     public void setTime(String date) { // 显示时间
         task_time.setText(date);
     }
-
+*/
 }

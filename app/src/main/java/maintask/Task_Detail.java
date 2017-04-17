@@ -1,19 +1,30 @@
 package maintask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.maximtian.myapptask.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import DataBase.DBManager;
+import DataBase.Task_Item;
+import Public.Public_Value;
 import datamodel.MyListView;
 
 /**
@@ -23,13 +34,53 @@ import datamodel.MyListView;
 public class Task_Detail extends Activity {
 
     private MyListView remark_lv;
+    private Task_Item current_task; // 当前任务
+    private DBManager dbManager;
+
+    private TextView task_Belong;
+    private TextView task_name;
+    private TextView responser;
+    private ImageView responser_img;
+    private TextView task_time;
+    private CheckBox mycheckbox;
+
+    private Button cancelBt;
+    private Button confirmBt;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_detail_layout);
 
+        dbManager = new DBManager(this);
+
+        getCurrent_task();
+        init_view();
         init_remark();
+        init_button();
+    }
+
+    private void getCurrent_task() {
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+//        Toast.makeText(Task_Detail.this, title, Toast.LENGTH_SHORT).show();
+        current_task = dbManager.QueryTask(title);
+    }
+
+    private void init_view() {
+        task_Belong = (TextView) findViewById(R.id.task_belong);
+        task_name = (TextView) findViewById(R.id.task_detail_name);
+        responser = (TextView) findViewById(R.id.detail_responsor);
+        responser_img = (ImageView) findViewById(R.id.detail_portrait);
+        task_time = (TextView) findViewById(R.id.detail_time);
+        mycheckbox = (CheckBox) findViewById(R.id.checkbox_touch);
+
+       task_Belong.setText(current_task.getProject_Belong());
+       task_name.setText(current_task.getName());
+       responser.setText(current_task.getResponser());
+       task_time.setText(current_task.getTime());
+       responser_img.setImageResource(
+               dbManager.QueryUser(current_task.getResponser()).getImage() );
     }
 
     // 让ListView随着整个界面滑动
@@ -70,6 +121,43 @@ public class Task_Detail extends Activity {
         list.add(map);
 
         return list;
+    }
+
+    private void init_button() {
+        cancelBt = (Button) findViewById(R.id.task_detail_cancel);
+        cancelBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        confirmBt = (Button) findViewById(R.id.task_detail_confirm);
+        confirmBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // updateTaskData(int id, String name, String responser, String time, String project, int state)
+                int id = current_task.getId();
+                String name = current_task.getName();
+                String res = current_task.getResponser();
+                String time = getfinish_time();
+                String pro = current_task.getProject_Belong();
+                if(!mycheckbox.isChecked()) {
+                    current_task.setState(1);
+                }
+                int sta = current_task.getState();
+                dbManager.updateTaskData(id, name, res, time, pro, sta);
+
+                Public_Value.AddDynamic_Option(Task_Detail.this, 2, name, pro); // 记录动态
+                Toast.makeText(Task_Detail.this, "任务完成", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+    }
+
+    private String getfinish_time() { // 设置完成任务时间
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd HH:mm");
+        return sDateFormat.format(new java.util.Date());
     }
 
 }

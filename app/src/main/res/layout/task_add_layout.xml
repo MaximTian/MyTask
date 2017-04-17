@@ -30,7 +30,7 @@
             android:src="@drawable/task_title"/>
 
         <EditText
-            android:id="@+id/dialog_task_title"
+            android:id="@+id/task_add_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="输入任务标题"
@@ -110,7 +110,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bt_cancel"
+            android:id="@+id/task_add_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -125,7 +125,7 @@
             android:background="#D3D3D3" />
 
         <Button
-            android:id="@+id/bt_confirm"
+            android:id="@+id/task_add_confirm"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

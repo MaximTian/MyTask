@@ -14,14 +14,20 @@ import android.widget.Toast;
 
 import com.example.maximtian.myapptask.R;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import DataBase.DBManager;
+import DataBase.Task_Item;
+import DataBase.User_Item;
+import Public.Public_Value;
 import datamodel.Group;
 import datamodel.Item;
 import datamodel.MyExpandAdapter;
+import datamodel.MyTaskAdapter;
 
 /**
  * Created by MaximTian on 2017/3/26.
@@ -30,8 +36,7 @@ import datamodel.MyExpandAdapter;
 public class Task_Activity extends Activity {
 
     private ListView task_lv;
-    private SimpleAdapter simpleAda;
-    private List<Map<String, Object>> list;
+    private List<Task_Item> tasks; // 系统任务总数
 
     private ExpandableListView expand_lv;
     private MyExpandAdapter myexp_ada;
@@ -40,10 +45,14 @@ public class Task_Activity extends Activity {
     private ArrayList<ArrayList<Item>> iData = null;
     private ArrayList<Item> lsData;
 
+    private DBManager dbManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_layout);
+
+        dbManager = new DBManager(this);
 
         init_listview();
 
@@ -54,15 +63,15 @@ public class Task_Activity extends Activity {
 
     private void init_listview() {
         task_lv = (ListView) findViewById(R.id.task_listview); // 加载项目列表
-        simpleAda = new SimpleAdapter(this, getData(),
-                R.layout.task_item, new String[]{"name", "portrait", "responsor", "time", "proj_be"},
-                new int[]{R.id.task_name, R.id.portrait, R.id.responsor, R.id.task_time, R.id.proj_belong});  // 设计项目适配器
-        task_lv.setAdapter(simpleAda); // 显示项目名单
+        final MyTaskAdapter adapter = getData();
+
+        task_lv.setAdapter(adapter); // 显示项目名单
         // 给Item添加点击事件
         task_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                 Intent start_main = new Intent(Task_Activity.this, Task_Detail.class);
+                start_main.putExtra("title", adapter.getData().get(pos).getName());
                 startActivity(start_main);
             }
         });
@@ -75,9 +84,16 @@ public class Task_Activity extends Activity {
         gData.add(new Group("已完成"));
 
         lsData = new ArrayList<Item>();
-        lsData.add(new Item("剑圣", R.drawable.animal1, "Maxim", "2017-04-04 21:00", "Table"));
-        lsData.add(new Item("德莱文", R.drawable.animal1, "Maxim", "2017-04-05 02:00", "Desk"));
-        lsData.add(new Item("男枪", R.drawable.animal1, "Maxim", "2017-04-06 21:00", "Table"));
+        tasks = dbManager.getAllTask();
+        for (int i = 0; i < tasks.size(); i++) {
+            User_Item myUser = dbManager.QueryUser(Public_Value.getCurrent_User());
+            Task_Item myTask = tasks.get(i);
+            if (myTask.getState() == 1
+                    && myTask.getResponser().equals(myUser.getName()) ) { // 如果任务负责人是当前用户才显示
+                lsData.add(new Item(myTask.getName(), myUser.getImage(),
+                        myUser.getName(), myTask.getTime(), myTask.getProject_Belong()));
+            }
+        }
         iData.add(lsData);
 
         myexp_ada = new MyExpandAdapter(gData,iData,mContext);
@@ -92,40 +108,18 @@ public class Task_Activity extends Activity {
         });
     }
 
-    private List<Map<String, Object>> getData() {
-        list = new ArrayList<Map<String, Object>>();
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", "吃饭");
-        map.put("portrait", R.drawable.animal1);
-        map.put("responsor", "Maxim");
-        map.put("time", "2017-04-07 21:00");
-        map.put("proj_be", "Table");
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("name", "洗澡");
-        map.put("portrait", R.drawable.animal2);
-        map.put("responsor", "Jack");
-        map.put("time", "2017-04-07 22:00");
-        map.put("proj_be", "Desk");
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("name", "睡觉");
-        map.put("portrait", R.drawable.animal3);
-        map.put("responsor", "Rose");
-        map.put("time", "2017-04-07 23:00");
-        map.put("proj_be", "Homework");
-        list.add(map);
-
-        map = new HashMap<String, Object>();
-        map.put("name", "喝水");
-        map.put("portrait", R.drawable.animal4);
-        map.put("responsor", "Tom");
-        map.put("time", "2017-04-08 1:00");
-        map.put("proj_be", "Fire");
-        list.add(map);
-
-        return list;
+    private MyTaskAdapter getData() { // 获取当前任务列表
+        ArrayList<Task_Item> data = new ArrayList<Task_Item>();
+        tasks = dbManager.getAllTask();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getState() == 0) {
+                if (Public_Value.getCurrent_User()
+                        .equals(tasks.get(i).getResponser()) ) {
+                    data.add(tasks.get(i));
+                }
+            }
+        }
+        MyTaskAdapter myAdapter = new MyTaskAdapter(data, Task_Activity.this);
+        return myAdapter;
     }
 }

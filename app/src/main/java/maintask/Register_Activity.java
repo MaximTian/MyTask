@@ -41,6 +41,7 @@ public class Register_Activity extends Activity {
         registerBtn.setOnClickListener(new Button.OnClickListener() { // 注册
             public void onClick(View v) {
                 if (listenerRegister()) {
+                    init_user_id(); // 设置当前id
                     String ps = password.getText().toString();
                     String ac = account.getText().toString();
                     User_Item user = new User_Item(Public_Value.getUser_ID(), ac, ps, 0, Public_Value.getImage_ID());
@@ -73,6 +74,10 @@ public class Register_Activity extends Activity {
             return false;
         }
         return true;
+    }
+
+    private void init_user_id() { // 获取当前用户ID
+        Public_Value.setUser_ID(dbManager.getAllUser().size());
     }
 
 }

@@ -54,12 +54,16 @@ public class Proj_Add extends Activity {
                 String title = s_title.getText().toString();
                 String time = s_time.getText().toString();
                 String creator = s_creator.getText().toString();
+                init_project_id(); // 设置当前id;
                 Project_Item proj = new Project_Item(Public_Value.getProject_ID(), title, creator, time, creator);
                 if (title.isEmpty()) {
                     Toast.makeText(Proj_Add.this, "项目名为空", Toast.LENGTH_SHORT).show();
                 } else {
                     dbManager.addProjectSQL(proj);
                 }
+
+                // public static void AddDynamic_Option(Context context, int opt, String aim, String belong)
+                Public_Value.AddDynamic_Option(Proj_Add.this, 0, title, title);
                 finish();
             }
         });
@@ -71,6 +75,10 @@ public class Proj_Add extends Activity {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = sDateFormat.format(new java.util.Date());
         s_time.setText(date);
+    }
+
+    private void init_project_id() { // 获取当前项目ID
+        Public_Value.setProject_ID(dbManager.getAllProject().size());
     }
 
 }

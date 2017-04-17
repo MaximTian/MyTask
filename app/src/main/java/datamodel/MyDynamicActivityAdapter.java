@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.maximtian.myapptask.R;
 
@@ -18,15 +17,15 @@ import DataBase.Dynamic_Item;
 import DataBase.User_Item;
 
 /**
- * Created by MaximTian on 2017/4/12.
+ * Created by MaximTian on 2017/4/17.
  */
 
-public class MyDynamicAdapter extends BaseAdapter {
+public class MyDynamicActivityAdapter extends BaseAdapter {
 
     private ArrayList<Dynamic_Item> data;
     private Context mContext;
 
-    public MyDynamicAdapter(ArrayList<Dynamic_Item> data, Context mContext) {
+    public MyDynamicActivityAdapter(ArrayList<Dynamic_Item> data, Context mContext) {
         this.data =data;
         this.mContext = mContext;
     }
@@ -51,13 +50,14 @@ public class MyDynamicAdapter extends BaseAdapter {
         ViewHolderItem itemHolder;
         if(convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(
-                    R.layout.dynamic_item, parent, false);
+                    R.layout.dynamic_activity_item, parent, false);
             itemHolder = new ViewHolderItem();
             itemHolder.image = (ImageView) convertView.findViewById(R.id.dynamic_image);
             itemHolder.name = (TextView) convertView.findViewById(R.id.dynamic_name);
             itemHolder.opt = (TextView) convertView.findViewById(R.id.dynamic_option);
             itemHolder.aim = (TextView) convertView.findViewById(R.id.dynamic_aim);
             itemHolder.time = (TextView) convertView.findViewById(R.id.dynamic_time);
+            itemHolder.belong = (TextView) convertView.findViewById(R.id.dynamic_belong);
             convertView.setTag(itemHolder);
         } else {
             itemHolder = (ViewHolderItem) convertView.getTag();
@@ -68,7 +68,8 @@ public class MyDynamicAdapter extends BaseAdapter {
         itemHolder.opt.setText(data.get(position).getOpt());
         itemHolder.aim.setText(data.get(position).getAim());
         itemHolder.time.setText(data.get(position).getTime());
- //       Toast.makeText(mContext, data.get(position).getCreator(), Toast.LENGTH_SHORT).show();
+        itemHolder.belong.setText(data.get(position).getBelong());
+        //       Toast.makeText(mContext, data.get(position).getCreator(), Toast.LENGTH_SHORT).show();
         return convertView;
     }
 
@@ -78,5 +79,6 @@ public class MyDynamicAdapter extends BaseAdapter {
         private TextView opt; // 操作
         private TextView aim; // 内容
         private TextView time; // 时间
+        private TextView belong; // 归属
     }
 }

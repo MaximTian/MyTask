@@ -6,21 +6,27 @@ package DataBase;
 
 public class Task_Item {
 
+    private int id; // 任务id
     private String name; // 任务名称
     private String responser; // 执行人
     private String time; // 截止时间
     private String project; // 归属
-    private boolean state; // 状态
+    private int state; // 状态
 
     public Task_Item() {
     }
 
-    public Task_Item(String name, String responser, String time, String project, boolean state) {
+    public Task_Item(int id, String name, String responser, String time, String project, int state) {
+        this.id = id;
         this.name = name;
         this.responser = responser;
         this.time = time;
         this.project = project;
         this.state = state;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getName() {
@@ -35,12 +41,16 @@ public class Task_Item {
         return time;
     }
 
-    public String getProject() {
+    public String getProject_Belong() {
         return project;
     }
 
-    public boolean getState() {
+    public int getState() {
         return state;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -55,12 +65,15 @@ public class Task_Item {
         this.time = time;
     }
 
-    public void setProject(String project) {
+    public void setProject_Belong(String project) {
         this.project = project;
     }
 
-    public void setState(boolean state) {
+    public void setState(int state) {
         this.state = state;
     }
+
+
+
 
 }

@@ -24,6 +24,7 @@ import java.util.List;
 import DataBase.DBManager;
 import DataBase.Dynamic_Item;
 import DataBase.Project_Item;
+import Public.Public_Value;
 import datamodel.MyDynamicAdapter;
 import datamodel.MyUserAdapter;
 import datamodel.MyTaskAdapter;
@@ -58,8 +59,8 @@ public class Proj_Detail extends Activity {
 
         getCurrent_Project();
         init_view();
-        select_Button();
         init_project_task();
+        select_Button();
     }
 
     private void getCurrent_Project() {
@@ -150,9 +151,9 @@ public class Proj_Detail extends Activity {
                             }
                         }
                         current_proj.setUser_gather(proj_user);
-                        // updateProjectData(int id, String name, String creator, String time, String users)
                         dbManager.updateProjectData(current_proj.getId(), current_proj.getName(),
                                 current_proj.getCreator(), current_proj.getTime(), current_proj.getUser_gather());
+                        Public_Value.AddDynamic_Option(Proj_Detail.this, 3, current_proj.getName(), current_proj.getName()); // 添加动态信息
                     }
                 });
         builder.show();
@@ -161,12 +162,9 @@ public class Proj_Detail extends Activity {
     private MyUserAdapter get_people_data() { // 获取成员信息
         iuser = new ArrayList<User_Item>();
         String current_user = current_proj.getUser_gather();
-        Toast.makeText(Proj_Detail.this, current_user, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(Proj_Detail.this, current_user, Toast.LENGTH_SHORT).show();
         List<User_Item> users = dbManager.getAllUser();
         for (int i = 0; i < users.size(); i++) {
-/*            if (current_user.indexOf(users.get(i).getName()) == -1) {
-                users.get(i).setState(1);
-            } */
             iuser.add(users.get(i));
         }
         MyUserAdapter myAdapter = new MyUserAdapter(iuser, Proj_Detail.this);
@@ -194,16 +192,18 @@ public class Proj_Detail extends Activity {
 
     private MyDynamicAdapter get_dynamic_data() { // 获取动态信息
         ArrayList<Dynamic_Item> data = new ArrayList<Dynamic_Item>();
-        data.add(new Dynamic_Item(R.drawable.animal2, "Jack", "创建了项目", "洗澡", "04-04 12:54"));
-        data.add(new Dynamic_Item(R.drawable.animal2, "Jack", "创建了任务", "睡觉", "04-04 13:06"));
-        data.add(new Dynamic_Item(R.drawable.animal2, "Jack", "修改了任务", "睡觉", "04-05 13:06"));
-        data.add(new Dynamic_Item(R.drawable.animal1, "Maxim", "完成了任务", "睡觉", "04-06 17:28"));
+        List<Dynamic_Item> dynamics = dbManager.getAllDynamic();
+        for (int i = 0; i < dynamics.size(); i++) {
+            if (dynamics.get(i).getBelong().equals(current_proj.getName())) {
+                data.add(dynamics.get(i));
+            }
+        }
 
         MyDynamicAdapter myAdapter = new MyDynamicAdapter(data, Proj_Detail.this);
         return myAdapter;
     }
 
-    private void init_project_task() { // 加载任务清单
+    private void init_project_task() { // 显示任务清单
         ListView lv = (ListView) findViewById(R.id.proj_task_listview);
         lv.setBackgroundColor(getResources().getColor(R.color.white));
         lv.setAdapter(get_task_listview());
@@ -211,11 +211,14 @@ public class Proj_Detail extends Activity {
 
     private MyTaskAdapter get_task_listview() { // 获取任务清单
         ArrayList<Task_Item> data = new ArrayList<Task_Item>();
-        data.add(new Task_Item("嘉文", "Jack", "04-04 12:54", "皇子", false));
-        data.add(new Task_Item("刀锋", "Jack", "04-04 12:54", "刷碗", false));
-        data.add(new Task_Item("德玛西亚", "Jack", "04-04 12:54", "盖伦", false));
-        data.add(new Task_Item("提莫", "Jack", "04-04 12:54", "法师", false));
-
+        List<Task_Item> tasks = dbManager.getAllTask();
+    //    Toast.makeText(Proj_Detail.this, String.valueOf(tasks.size()), Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (current_proj.getName().equals(tasks.get(i).getProject_Belong())
+                    && tasks.get(i).getState() == 0) {
+                data.add(tasks.get(i));
+            }
+        }
         MyTaskAdapter myAdapter = new MyTaskAdapter(data, Proj_Detail.this);
         return myAdapter;
     }

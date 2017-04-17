@@ -19,7 +19,7 @@ public class Item {
         this.iName = iName;
         this.iPort = iPort;
         this.iPort_name = iPort_name;
-        this.iTime = iTime;
+        this.iTime = iTime + "(完成)";
         this.iProj = iProj;
     }
 

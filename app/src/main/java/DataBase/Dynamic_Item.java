@@ -6,29 +6,31 @@ package DataBase;
 
 public class Dynamic_Item {
 
-    private int image; // 头像
-    private String name; // 名称
+    private int id;
+    private String creator; // 名称
     private String opt; // 操作
     private String aim; // 内容
     private String time; // 时间
+    private String belong; // 归属
 
     public Dynamic_Item() {
     }
 
-    public Dynamic_Item(int image, String name, String opt, String aim, String time) {
-        this.name = name;
-        this.image = image;
+    public Dynamic_Item(int id, String creator, String opt, String aim, String time, String belong) {
+        this.id = id;
+        this.creator = creator;
         this.opt = opt;
         this.aim = aim;
         this.time = time;
+        this.belong = belong;
     }
 
-    public int getImage() {
-        return image;
+    public int getId() {
+        return id;
     }
 
-    public String getName() {
-        return name;
+    public String getCreator() {
+        return creator;
     }
 
     public String getOpt() {
@@ -43,12 +45,16 @@ public class Dynamic_Item {
         return time;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public String getBelong() {
+        return belong;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public void setOpt(String opt) {
@@ -63,4 +69,7 @@ public class Dynamic_Item {
         this.time = time;
     }
 
+    public void setBelong(String belong) {
+        this.belong = belong;
+    }
 }
