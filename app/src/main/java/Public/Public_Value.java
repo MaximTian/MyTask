@@ -20,8 +20,19 @@ public class Public_Value {
     private static String current_user = "Maxim"; // 当前用户
 
     private static int User_ID = 0; // 用户ID
-    private static int[] Image_ID = {R.drawable.animal1, R.drawable.animal2, R.drawable.animal3, R.drawable.animal4, R.drawable.animal5}; // 用户头像
-    public static int[] Project_Img = {R.drawable.project_img1,
+    private static int[] Image_ID = { // 用户头像
+            R.drawable.animal1,
+            R.drawable.animal2,
+            R.drawable.animal3,
+            R.drawable.animal4,
+            R.drawable.animal5,
+            R.drawable.animal6,
+            R.drawable.animal7,
+            R.drawable.animal8,
+            R.drawable.animal9,
+    };
+    public static int[] Project_Img = { // 项目图片
+            R.drawable.project_img1,
             R.drawable.project_img2,
             R.drawable.project_img3,
             R.drawable.project_img4,
@@ -31,7 +42,7 @@ public class Public_Value {
             R.drawable.project_img8
     };
 
-    private static String current_proj_name; // 当前用户
+    private static String current_proj_name; // 当前项目
 
     private static int Project_ID = 0; // 项目ID
 

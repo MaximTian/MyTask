@@ -18,6 +18,8 @@ import java.util.Map;
 
 import DataBase.DBManager;
 import DataBase.Dynamic_Item;
+import DataBase.User_Item;
+import Public.Public_Value;
 import datamodel.MyDynamicActivityAdapter;
 import datamodel.MyDynamicAdapter;
 
@@ -47,7 +49,10 @@ public class Dynamic_Activity extends Activity {
         ArrayList<Dynamic_Item> data = new ArrayList<Dynamic_Item>();
         List<Dynamic_Item> dynamics = dbManager.getAllDynamic();
         for (int i = 0; i < dynamics.size(); i++) {
+            String name = Public_Value.getCurrent_User();
+            if (name.equals(dynamics.get(i).getCreator())) {
                 data.add(dynamics.get(i));
+            }
         }
 
         MyDynamicActivityAdapter myAdapter = new MyDynamicActivityAdapter(data, Dynamic_Activity.this);

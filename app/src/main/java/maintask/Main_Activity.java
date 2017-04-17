@@ -35,7 +35,7 @@ public class Main_Activity extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("tag1").setIndicator("0").setContent(new Intent(this, Task_Activity.class))); // 设置任务界面标签
         tabHost.addTab(tabHost.newTabSpec("tag2").setIndicator("1").setContent(new Intent(this, Proj_Activity.class))); // 设置项目界面标签
         tabHost.addTab(tabHost.newTabSpec("tag3").setIndicator("2").setContent(new Intent(this, Dynamic_Activity.class))); // 设置动态界面标签
-        tabHost.addTab(tabHost.newTabSpec("tag4").setIndicator("3").setContent(new Intent(this, Task_Activity.class))); // 设置个人界面标签
+        tabHost.addTab(tabHost.newTabSpec("tag4").setIndicator("3").setContent(new Intent(this, Personal_Activity.class))); // 设置个人界面标签
 
         checkListener checkradio = new checkListener();
         main_rg.setOnCheckedChangeListener(checkradio);

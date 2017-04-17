@@ -25,6 +25,7 @@
         <activity android:name="maintask.Task_Detail" />
         <activity android:name="maintask.Proj_Detail" />
         <activity android:name="maintask.Task_Add_Activity" />
+        <activity android:name="maintask.Personal_Activity" />
     </application>
 
 </manifest>
